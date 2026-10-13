@@ -1,0 +1,262 @@
+{
+  "shuffle_seed": 42,
+  "description": "Fixed sample order. Reorder this array to change numbering for every language.",
+  "questions": [
+    {
+      "id": "preferredcontact",
+      "type": "single",
+      "prompt": "preferredcontact.prompt",
+      "options": [
+        "preferredcontact.option.1",
+        "preferredcontact.option.2",
+        "preferredcontact.option.3"
+      ]
+    },
+    {
+      "id": "travel",
+      "type": "single",
+      "prompt": "travel.prompt",
+      "options": [
+        "travel.option.1",
+        "travel.option.2",
+        "travel.option.3"
+      ]
+    },
+    {
+      "id": "locations",
+      "type": "multiple",
+      "prompt": "locations.prompt",
+      "options": [
+        "locations.option.1",
+        "locations.option.2",
+        "locations.option.3"
+      ]
+    },
+    {
+      "id": "staff",
+      "type": "matrix",
+      "prompt": "staff.prompt",
+      "rows": [
+        "staff.row.1",
+        "staff.row.2",
+        "staff.row.3"
+      ],
+      "scale": [
+        "scale.1",
+        "scale.2",
+        "scale.3",
+        "scale.4",
+        "scale.5"
+      ]
+    },
+    {
+      "id": "clarity",
+      "type": "single",
+      "prompt": "clarity.prompt",
+      "options": [
+        "clarity.option.1",
+        "clarity.option.2",
+        "clarity.option.3"
+      ]
+    },
+    {
+      "id": "documents",
+      "type": "multiple",
+      "prompt": "documents.prompt",
+      "options": [
+        "documents.option.1",
+        "documents.option.2",
+        "documents.option.3"
+      ]
+    },
+    {
+      "id": "recommend",
+      "type": "single",
+      "prompt": "recommend.prompt",
+      "options": [
+        "recommend.option.1",
+        "recommend.option.2",
+        "recommend.option.3"
+      ]
+    },
+    {
+      "id": "barriers",
+      "type": "multiple",
+      "prompt": "barriers.prompt",
+      "options": [
+        "barriers.option.1",
+        "barriers.option.2",
+        "barriers.option.3"
+      ]
+    },
+    {
+      "id": "services",
+      "type": "multiple",
+      "prompt": "services.prompt",
+      "options": [
+        "services.option.1",
+        "services.option.2",
+        "services.option.3",
+        "services.option.4",
+        "services.option.5",
+        "services.option.6",
+        "services.option.7",
+        "services.option.8",
+        "services.option.9",
+        "services.option.10",
+        "services.option.11",
+        "services.option.12",
+        "services.option.13",
+        "services.option.14",
+        "services.option.15"
+      ]
+    },
+    {
+      "id": "future",
+      "type": "multiple",
+      "prompt": "future.prompt",
+      "options": [
+        "future.option.1",
+        "future.option.2",
+        "future.option.3"
+      ]
+    },
+    {
+      "id": "experience",
+      "type": "matrix",
+      "prompt": "experience.prompt",
+      "rows": [
+        "experience.row.1",
+        "experience.row.2",
+        "experience.row.3"
+      ],
+      "scale": [
+        "scale.1",
+        "scale.2",
+        "scale.3",
+        "scale.4",
+        "scale.5"
+      ]
+    },
+    {
+      "id": "frequency",
+      "type": "single",
+      "prompt": "frequency.prompt",
+      "options": [
+        "frequency.option.1",
+        "frequency.option.2",
+        "frequency.option.3"
+      ]
+    },
+    {
+      "id": "formats",
+      "type": "multiple",
+      "prompt": "formats.prompt",
+      "options": [
+        "formats.option.1",
+        "formats.option.2",
+        "formats.option.3"
+      ]
+    },
+    {
+      "id": "appointment",
+      "type": "single",
+      "prompt": "appointment.prompt",
+      "options": [
+        "appointment.option.1",
+        "appointment.option.2",
+        "appointment.option.3"
+      ]
+    },
+    {
+      "id": "reply",
+      "type": "single",
+      "prompt": "reply.prompt",
+      "options": [
+        "reply.option.1",
+        "reply.option.2",
+        "reply.option.3"
+      ]
+    },
+    {
+      "id": "improvements",
+      "type": "multiple",
+      "prompt": "improvements.prompt",
+      "options": [
+        "improvements.option.1",
+        "improvements.option.2",
+        "improvements.option.3"
+      ]
+    },
+    {
+      "id": "usualcontact",
+      "type": "single",
+      "prompt": "usualcontact.prompt",
+      "options": [
+        "usualcontact.option.1",
+        "usualcontact.option.2",
+        "usualcontact.option.3"
+      ]
+    },
+    {
+      "id": "application",
+      "type": "single",
+      "prompt": "application.prompt",
+      "options": [
+        "application.option.1",
+        "application.option.2",
+        "application.option.3"
+      ]
+    },
+    {
+      "id": "help",
+      "type": "multiple",
+      "prompt": "help.prompt",
+      "options": [
+        "help.option.1",
+        "help.option.2",
+        "help.option.3"
+      ]
+    },
+    {
+      "id": "discovery",
+      "type": "single",
+      "prompt": "discovery.prompt",
+      "options": [
+        "discovery.option.1",
+        "discovery.option.2",
+        "discovery.option.3"
+      ]
+    },
+    {
+      "id": "internet",
+      "type": "single",
+      "prompt": "internet.prompt",
+      "options": [
+        "internet.option.1",
+        "internet.option.2",
+        "internet.option.3"
+      ]
+    },
+    {
+      "id": "duration",
+      "type": "single",
+      "prompt": "duration.prompt",
+      "options": [
+        "duration.option.1",
+        "duration.option.2",
+        "duration.option.3"
+      ]
+    },
+    {
+      "id": "reminders",
+      "type": "multiple",
+      "prompt": "reminders.prompt",
+      "options": [
+        "reminders.option.1",
+        "reminders.option.2",
+        "reminders.option.3"
+      ]
+    }
+  ]
+}

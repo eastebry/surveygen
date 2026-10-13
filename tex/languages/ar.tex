@@ -1,0 +1,15 @@
+\usepackage{polyglossia}
+\setdefaultlanguage[numerals=maghrib]{arabic}
+\setotherlanguage{english}
+\setmainfont{Noto Sans}
+\newfontfamily\arabicfont[Script=Arabic]{Noto Naskh Arabic}
+\newfontfamily\englishfont{Noto Sans}
+\SurveyRTLtrue
+% TeX Live 2022's multicol measures a hidden Latin p twice at shipout.
+% Use the Latin font only for that invisible measurement, not for survey text.
+\makeatletter
+\patchcmd{\page@sofar}{\hbox{p}}{\hbox{\englishfont p}}{}{%
+  \PackageError{survey}{Unexpected multicol version}{Review the Arabic column-depth font patch.}}
+\patchcmd{\page@sofar}{\phantom p}{\phantom{\englishfont p}}{}{%
+  \PackageError{survey}{Unexpected multicol version}{Review the Arabic column-depth font patch.}}
+\makeatother

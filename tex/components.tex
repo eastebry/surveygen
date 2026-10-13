@@ -1,0 +1,97 @@
+% Original, text-free fictional agency emblem. Units are centimetres.
+\newcommand{\AgencyLogo}[1]{%
+  \begin{tikzpicture}[x=#1cm,y=#1cm,baseline=0pt,line width=.65pt]
+    \draw (0,0) rectangle (1,1);
+    \draw (.15,.65)--(.5,.85)--(.85,.65)--cycle;
+    \draw (.18,.22)--(.82,.22) (.14,.15)--(.86,.15);
+    \foreach \x in {.25,.5,.75}{\draw (\x,.28)--(\x,.58);}
+  \end{tikzpicture}}
+
+\newcommand{\SurveyPageNumber}{\tr{page.label}}
+% fancyhdr disables \label in running furniture. Write validation markers
+% explicitly, using the page number already fixed by the output routine.
+\makeatletter
+\newcommand{\PageMarker}[1]{\immediate\write\@auxout{\string\newlabel{#1}{{}{\thepage}}}}
+\makeatother
+\newcommand{\HeaderLogo}{%
+  \begin{minipage}[c]{.09\textwidth}\ifSurveyRTL\raggedleft\fi\AgencyLogo{.86}\end{minipage}}
+\newcommand{\HeaderText}{%
+  \begin{minipage}[c]{.68\textwidth}
+    \ifSurveyRTL\begin{RTL}\raggedleft\else\raggedright\fi
+    {\fontsize{9}{12}\selectfont\tr{agency}\par}%
+    {\fontsize{11}{14}\selectfont\bfseries\tr{survey.title}\par}%
+    \ifSurveyRTL\end{RTL}\fi
+  \end{minipage}}
+\newcommand{\HeaderNumber}{%
+  \begin{minipage}[c]{.23\textwidth}
+    \ifSurveyRTL\begin{RTL}\raggedright\else\raggedleft\fi
+    \fontsize{9}{12}\selectfont\SurveyPageNumber
+    \ifSurveyRTL\end{RTL}\fi
+  \end{minipage}}
+\fancypagestyle{survey}{%
+  \fancyhf{}
+  \renewcommand{\headrulewidth}{.6pt}
+  \fancyhead[C]{%
+    \PageMarker{header:\thepage}%
+    \ifSurveyRTL\begin{LTR}\HeaderNumber\HeaderText\HeaderLogo\end{LTR}%
+    \else\HeaderLogo\HeaderText\HeaderNumber\fi}
+  \fancyfoot[C]{\ifnum\value{page}<\getpagerefnumber{survey:last}\relax
+    \PageMarker{footer:\thepage}%
+    {\fontsize{9}{12}\selectfont\tr{footer.continue}}\fi}}
+
+% Vector response marks avoid font-dependent checkbox glyphs.
+\newcommand{\SingleMark}{\tikz[baseline=-.6ex]\draw[line width=.55pt] (0,0) circle[radius=1.5mm];}
+\newcommand{\MultiMark}{\tikz[baseline=-.6ex]\draw[line width=.55pt] (0,0) rectangle (3mm,3mm);}
+\newcommand{\CurrentMark}{\SingleMark}
+\newsavebox{\QuestionBox}
+\newcommand{\CurrentQuestionId}{}
+\newenvironment{QuestionBlock}[4]{%
+  \renewcommand{\CurrentQuestionId}{#1}%
+  \begin{lrbox}{\QuestionBox}\begin{minipage}{\linewidth}
+  \setlength{\parindent}{0pt}\setlength{\parskip}{0pt}%
+  \ifSurveyRTL\raggedleft\else\RaggedRight\fi
+  \label{q:#1:start}%
+  {\bfseries #2.\enspace\tr{#3}\par}%
+  \vspace{1pt}%
+  {\fontsize{9}{11}\selectfont\color{black!70}\tr{#4}\par}%
+  \vspace{3pt}%
+}{%
+  \label{q:\CurrentQuestionId:end}%
+  \end{minipage}\end{lrbox}%
+  \ifdim\dimexpr\ht\QuestionBox+\dp\QuestionBox\relax>\textheight
+    \PackageError{survey}{Question \CurrentQuestionId\space is taller than a column}{Shorten this question or its answers.}%
+  \fi
+  \noindent\usebox{\QuestionBox}\par\vspace{10pt}%
+}
+
+\newcommand{\Choice}[3]{%
+  \noindent\hangindent=16pt\hangafter=1
+  \label{a:#1:#2}%
+  \ifSurveyRTL\makebox[16pt][l]{\CurrentMark}\hspace{4pt}%
+  \else\makebox[16pt][l]{\CurrentMark}\fi\tr{#3}\strut\par}
+\newcommand{\SingleChoiceQuestion}[5]{%
+  \renewcommand{\CurrentMark}{\SingleMark}%
+  \begin{QuestionBlock}{#1}{#2}{#3}{instruction.single}#4#5\end{QuestionBlock}}
+\newcommand{\MultipleChoiceQuestion}[5]{%
+  \renewcommand{\CurrentMark}{\MultiMark}%
+  \begin{QuestionBlock}{#1}{#2}{#3}{instruction.multiple}#4#5\end{QuestionBlock}}
+
+\newcolumntype{Y}{>{\Centering\arraybackslash\hspace{0pt}}X}
+\newcommand{\MatrixHead}[5]{%
+  \rowcolor{black!7}%
+  \tr{matrix.statement}&\tr{#1}&\tr{#2}&\tr{#3}&\tr{#4}&\tr{#5}\\\hline}
+\newcommand{\MatrixRow}[3]{%
+  \label{a:#1:#2}\tr{#3}&\SingleMark&\SingleMark&\SingleMark&\SingleMark&\SingleMark\\\hline}
+\newcommand{\MatrixQuestion}[6]{%
+  \begin{QuestionBlock}{#1}{#2}{#3}{instruction.matrix}
+    \begingroup
+    \fontsize{9.5}{12}\selectfont
+    \lefthyphenmin=2\righthyphenmin=2
+    \setlength{\tabcolsep}{1.5pt}
+    \renewcommand{\arraystretch}{1.28}
+    \renewcommand{\tabularxcolumn}[1]{m{##1}}
+    \begin{tabularx}{\linewidth}{|>{\ifSurveyRTL\raggedleft\else\RaggedRight\fi\arraybackslash}m{.22\linewidth}|Y|Y|Y|Y|Y|}
+      \hline\MatrixHead#4#5
+    \end{tabularx}
+    \endgroup#6
+  \end{QuestionBlock}}
